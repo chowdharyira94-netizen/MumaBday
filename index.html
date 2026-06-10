@@ -1,0 +1,465 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise For Mumma💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{
+background:linear-gradient(135deg,#BDE0FE,#FFC8DD);
+min-height:100vh;text-align:center;color:#333;overflow-x:hidden;
+}
+.hero,.envelope-screen,.letter-page{
+min-height:100vh;display:flex;flex-direction:column;
+justify-content:center;align-items:center;padding:20px;
+}
+h1{font-size:3rem}
+.subtitle{max-width:600px;margin-top:15px}
+button{
+margin-top:25px;padding:15px 30px;border:none;border-radius:30px;
+background:white;cursor:pointer;font-size:1rem;
+box-shadow:0 5px 15px rgba(0,0,0,.12);transition:.3s;
+}
+button:hover{transform:scale(1.05)}
+.hidden{display:none;padding:40px 20px}
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin-top:35px}
+.gallery img{
+width:250px;height:350px;object-fit:cover;border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.15)
+}
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin-top:30px}
+.card{
+background:white;padding:20px;border-radius:20px;width:180px;
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+.message{max-width:700px;line-height:1.8;margin:auto}
+.final{margin-top:50px;font-size:1.5rem;font-weight:bold}
+.envelope{
+width:220px;height:150px;position:relative;cursor:pointer;
+animation:floaty 2s ease-in-out infinite;
+}
+.env-body{
+width:100%;height:100%;
+background:linear-gradient(135deg,#fff,#FFDDE8);
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+position:relative;
+}
+.flap{
+position:absolute;top:0;left:0;width:100%;height:75px;
+background:linear-gradient(135deg,#fff,#FFC8DD);
+clip-path:polygon(0 0,100% 0,50% 100%);
+}
+.seal{
+position:absolute;left:50%;top:50%;
+transform:translate(-50%,-20%);
+font-size:28px;
+}
+@keyframes floaty{
+50%{transform:translateY(-12px)}
+}
+.letter-card{
+position:relative;
+max-width:850px;
+margin:auto;
+padding:70px 50px;
+border-radius:10px;
+
+background:linear-gradient(
+180deg,
+#f5e6c8 0%,
+#f0dfbf 100%
+);
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.18),
+inset 0 0 40px rgba(120,80,40,.08);
+
+border:3px solid rgba(120,80,40,.15);
+
+font-family:'Caveat',cursive;
+font-size:2rem;
+line-height:1.6;
+text-align:left;
+color:#5a3c2b;
+
+overflow:hidden;
+margin-bottom:30px;
+}
+.letter-card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+
+background:
+radial-gradient(circle at top left,
+rgba(120,80,40,.15),
+transparent 30%),
+
+radial-gradient(circle at bottom right,
+rgba(120,80,40,.15),
+transparent 30%);
+
+pointer-events:none;
+}
+
+.letter-card::after{
+content:"✦";
+position:absolute;
+top:20px;
+right:25px;
+
+font-size:28px;
+color:#b88a44;
+opacity:.7;
+}
+.floating{
+position:fixed;font-size:24px;
+animation:rise 8s linear forwards;pointer-events:none;
+}
+@keyframes rise{
+0%{transform:translateY(100vh);opacity:0}
+20%{opacity:1}
+100%{transform:translateY(-120px);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="hero" id="hero">
+<h1> Hey Mumma 💖 </h1>
+<p class="subtitle">Here's a tiny little effort to make you smile a little today 👀 ...</p>
+<button onclick="openGift()">Open Your Surprise 🎁</button>
+</div>
+
+<div class="hidden" id="surprise">
+<h1>Happy Birthday To The World's Best Mumma🎂</h1>
+
+<p class="message">
+Wishing you a very Happy birthday.🥳<br>
+Your are the best and strongest mother in the world. 🌎  <br>
+Aise hi smile krte raha kro okieeeeee 🫣 <br>
+Baki I'm always with youuu okieee 🤌🏻🎀 <br>
+Thank you for everything 🎀<br>
+Thank you for being the way you are.💖😋
+</p>
+
+<div class="gallery">
+<img src="Photo5.jpg" alt="Photo 1">
+<img src="Photo6.jpg" alt="Photo 2">
+<img src="Photo7.jpg" alt="Photo 3">
+<img src="Photo8.jpg" alt="Photo 4">
+</div>
+
+<h2 style="margin-top:40px;">Things I Like About You ✨</h2>
+
+<div class="cards">
+<div class="card">Your Smile 😊</div>
+<div class="card">Your eyes like Aishwarya😌</div>
+<div class="card"> The way you support us🤌🏻 </div>
+<div class="card">Tumhare hath se khana😋😋</div>
+</div>
+
+<button onclick="showSecret()">DO NOT CLICK 👀</button>
+<p id="secretMessage" style="margin-top:20px;font-weight:600"></p>
+
+<div class="final">💙🩷 Happy Birthday Once Again, Mumma🩷💙</div>
+</div>
+
+<script>
+function openGift(){
+document.getElementById("hero").innerHTML=`
+<div class="envelope-screen">
+<div class="envelope" onclick="openLetter()">
+<div class="env-body"></div>
+<div class="flap"></div>
+<div class="seal"></div>
+</div>
+<h2>Open me 💛</h2>
+</div>`;
+}
+
+function openLetter(){
+document.getElementById("hero").innerHTML=`
+<div class="letter-page">
+<div class="letter-card">
+I know things are not easy. There's a lot of things going on. 🥲🥲 <br>
+
+Still you are standing with us. Thank you for being the strongest mother in the world  😘😘 <br>
+
+You never let us miss our father.😊😊 <br>
+
+I just want to say don't take too much burden, you've done your best mumma. 🫠<br>
+
+YOU ARE THE STRONGEST WOMEN I'VE EVER SEEN !!!!!! 💪🏻💙<br>
+
+Chalooo smile like thie always okie?? you look gorgeous as always 😌😌<br>
+
+I have something more !!!!!! 🤪🤪
+
+</div>
+<button onclick="showBirthdayPage()">✨ I have something more... ✨</button>
+</div>`;
+}
+
+function showBirthdayPage(){
+document.getElementById("hero").style.display="none";
+document.getElementById("surprise").style.display="block";
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+for(let i=0;i<30;i++){
+let h=document.createElement("div");
+h.className="floating";
+h.innerHTML=Math.random()>0.5?"💙":"🩷";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(5+Math.random()*4)+"s";
+document.body.appendChild(h);
+}
+}
+
+function showSecret(){
+document.getElementById("secretMessage").innerHTML=
+"Okay... since you clicked 👀💙<br><br>I Love Youuu Mumma ❣️<br><h3>Ye tumhare liye 🌹</h3>";
+}
+</script>
+</body>
+</html>DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Birthday Surprise For Mumma💙</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{
+background:linear-gradient(135deg,#BDE0FE,#FFC8DD);
+min-height:100vh;text-align:center;color:#333;overflow-x:hidden;
+}
+.hero,.envelope-screen,.letter-page{
+min-height:100vh;display:flex;flex-direction:column;
+justify-content:center;align-items:center;padding:20px;
+}
+h1{font-size:3rem}
+.subtitle{max-width:600px;margin-top:15px}
+button{
+margin-top:25px;padding:15px 30px;border:none;border-radius:30px;
+background:white;cursor:pointer;font-size:1rem;
+box-shadow:0 5px 15px rgba(0,0,0,.12);transition:.3s;
+}
+button:hover{transform:scale(1.05)}
+.hidden{display:none;padding:40px 20px}
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin-top:35px}
+.gallery img{
+width:250px;height:350px;object-fit:cover;border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.15)
+}
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;margin-top:30px}
+.card{
+background:white;padding:20px;border-radius:20px;width:180px;
+box-shadow:0 5px 15px rgba(0,0,0,.1)
+}
+.message{max-width:700px;line-height:1.8;margin:auto}
+.final{margin-top:50px;font-size:1.5rem;font-weight:bold}
+.envelope{
+width:220px;height:150px;position:relative;cursor:pointer;
+animation:floaty 2s ease-in-out infinite;
+}
+.env-body{
+width:100%;height:100%;
+background:linear-gradient(135deg,#fff,#FFDDE8);
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+position:relative;
+}
+.flap{
+position:absolute;top:0;left:0;width:100%;height:75px;
+background:linear-gradient(135deg,#fff,#FFC8DD);
+clip-path:polygon(0 0,100% 0,50% 100%);
+}
+.seal{
+position:absolute;left:50%;top:50%;
+transform:translate(-50%,-20%);
+font-size:28px;
+}
+@keyframes floaty{
+50%{transform:translateY(-12px)}
+}
+.letter-card{
+position:relative;
+max-width:850px;
+margin:auto;
+padding:70px 50px;
+border-radius:10px;
+
+background:linear-gradient(
+180deg,
+#f5e6c8 0%,
+#f0dfbf 100%
+);
+
+box-shadow:
+0 15px 40px rgba(0,0,0,.18),
+inset 0 0 40px rgba(120,80,40,.08);
+
+border:3px solid rgba(120,80,40,.15);
+
+font-family:'Caveat',cursive;
+font-size:2rem;
+line-height:1.6;
+text-align:left;
+color:#5a3c2b;
+
+overflow:hidden;
+margin-bottom:30px;
+}
+.letter-card::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+
+background:
+radial-gradient(circle at top left,
+rgba(120,80,40,.15),
+transparent 30%),
+
+radial-gradient(circle at bottom right,
+rgba(120,80,40,.15),
+transparent 30%);
+
+pointer-events:none;
+}
+
+.letter-card::after{
+content:"✦";
+position:absolute;
+top:20px;
+right:25px;
+
+font-size:28px;
+color:#b88a44;
+opacity:.7;
+}
+.floating{
+position:fixed;font-size:24px;
+animation:rise 8s linear forwards;pointer-events:none;
+}
+@keyframes rise{
+0%{transform:translateY(100vh);opacity:0}
+20%{opacity:1}
+100%{transform:translateY(-120px);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div class="hero" id="hero">
+<h1> Hey Mumma 💖 </h1>
+<p class="subtitle">Here's a tiny little effort to make you smile a little today 👀 ...</p>
+<button onclick="openGift()">Open Your Surprise 🎁</button>
+</div>
+
+<div class="hidden" id="surprise">
+<h1>Happy Birthday To The World's Best Mumma🎂</h1>
+
+<p class="message">
+Wishing you a very Happy birthday.🥳<br>
+Your are the best and strongest mother in the world. 🌎  <br>
+Aise hi smile krte raha kro okieeeeee 🫣 <br>
+Baki I'm always with youuu okieee 🤌🏻🎀 <br>
+Thank you for everything 🎀<br>
+Thank you for being the way you are.💖😋
+</p>
+
+<div class="gallery">
+<img src="Photo5.jpg" alt="Photo 1">
+<img src="Photo6.jpg" alt="Photo 2">
+<img src="Photo7.jpg" alt="Photo 3">
+<img src="Photo8.jpg" alt="Photo 4">
+</div>
+
+<h2 style="margin-top:40px;">Things I Like About You ✨</h2>
+
+<div class="cards">
+<div class="card">Your Smile 😊</div>
+<div class="card">Your eyes like Aishwarya😌</div>
+<div class="card"> The way you support us🤌🏻 </div>
+<div class="card">Tumhare hath se khana😋😋</div>
+</div>
+
+<button onclick="showSecret()">DO NOT CLICK 👀</button>
+<p id="secretMessage" style="margin-top:20px;font-weight:600"></p>
+
+<div class="final">💙🩷 Happy Birthday Once Again, Mumma🩷💙</div>
+</div>
+
+<script>
+function openGift(){
+document.getElementById("hero").innerHTML=`
+<div class="envelope-screen">
+<div class="envelope" onclick="openLetter()">
+<div class="env-body"></div>
+<div class="flap"></div>
+<div class="seal"></div>
+</div>
+<h2>Open me 💛</h2>
+</div>`;
+}
+
+function openLetter(){
+document.getElementById("hero").innerHTML=`
+<div class="letter-page">
+<div class="letter-card">
+I know things are not easy. There's a lot of things going on. 🥲🥲 <br>
+
+Still you are standing with us. Thank you for being the strongest mother in the world  😘😘 <br>
+
+You never let us miss our father.😊😊 <br>
+
+I just want to say don't take too much burden, you've done your best mumma. 🫠<br>
+
+YOU ARE THE STRONGEST WOMEN I'VE EVER SEEN !!!!!! 💪🏻💙<br>
+
+Chalooo smile like thie always okie?? you look gorgeous as always 😌😌<br>
+
+I have something more !!!!!! 🤪🤪
+
+</div>
+<button onclick="showBirthdayPage()">✨ I have something more... ✨</button>
+</div>`;
+}
+
+function showBirthdayPage(){
+document.getElementById("hero").style.display="none";
+document.getElementById("surprise").style.display="block";
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+for(let i=0;i<30;i++){
+let h=document.createElement("div");
+h.className="floating";
+h.innerHTML=Math.random()>0.5?"💙":"🩷";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(5+Math.random()*4)+"s";
+document.body.appendChild(h);
+}
+}
+
+function showSecret(){
+document.getElementById("secretMessage").innerHTML=
+"Okay... since you clicked 👀💙<br><br>I Love Youuu Mumma ❣️<br><h3>Ye tumhare liye 🌹</h3>";
+}
+</script>
+</body>
+</html>
